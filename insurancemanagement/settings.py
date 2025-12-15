@@ -125,7 +125,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Use non-manifest storage to avoid 500s when collectstatic isn't run in the serverless build
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 ALLOWED_HOSTS = ALLOWED_HOSTS + ['.vercel.app'] if 'ALLOWED_HOSTS' in globals() else ['.vercel.app']
 
